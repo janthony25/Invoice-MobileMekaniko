@@ -9,7 +9,12 @@ namespace Invoice_MobileMekaniko.Models
         [Required]
         public string CustomerName { get; set; }
         public string? CustomerEmail { get; set; }
+        public string? CarMake { get; set; }
+        public string? CarModel { get; set; }
         public string? PaymentStatus { get; set; }
+
+        // Has many Invoice
+        public ICollection<tblInvoice>? tblInvoice { get; set; }
 
     }
 }
