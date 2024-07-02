@@ -15,6 +15,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 //Repositories
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
+// Razor Runtime Compilation
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

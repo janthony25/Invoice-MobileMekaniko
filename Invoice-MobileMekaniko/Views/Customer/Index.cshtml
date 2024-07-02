@@ -1,5 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model List<Invoice_MobileMekaniko.Models.tblCustomer>
+
+<h1 class="text-center mb-4">Customer List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">Car Rego</th>
+            <th class="text-center">Customer Name</th>
+            <th class="text-center">Car Make</th>
+            <th class="text-center">Car Model</th>
+            <th class="text-center">Payment Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var customer in Model)
+        {
+            <tr>
+                <td class="text-center">@customer.CarRego</td>
+                <td class="text-center">@customer.CustomerName</td>
+                <td class="text-center">@customer.CarMake</td>
+                <td class="text-center">@customer.CarModel</td>
+                <td class="text-center">@customer.PaymentStatus</td>
+                <td class="text-center">
+                    <a class="btn btn-primary">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

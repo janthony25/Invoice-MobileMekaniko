@@ -5,5 +5,6 @@ namespace Invoice_MobileMekaniko.Repository
     public interface ICustomerRepository
     {
         Task<List<tblCustomer>> GetAllCustomersAsync();
+        Task AddCustomerAsync(tblCustomer customer);
     }
 }

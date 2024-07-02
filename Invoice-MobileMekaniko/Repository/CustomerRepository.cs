@@ -17,5 +17,11 @@ namespace Invoice_MobileMekaniko.Repository
             return await _context.tblCustomer
                 .ToListAsync();
         }
+
+        public async Task AddCustomerAsync(tblCustomer customer)
+        {
+            _context.tblCustomer.Add(customer);
+            await _context.SaveChangesAsync();
+        }
     }
 }
