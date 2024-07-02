@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Invoice_MobileMekaniko.Repository
 {
-    public class CustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
         private readonly ApplicationDbContext _context;
         public CustomerRepository(ApplicationDbContext context)
