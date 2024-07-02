@@ -13,7 +13,7 @@ namespace Invoice_MobileMekaniko.Models
         public string? Notes { get; set; }
         public decimal? LaborPrice { get; set; }
         public decimal? Discount { get; set; }
-        public decimal? Shipping { get; set; }
+        public decimal? ShippingFee { get; set; }
         public decimal? SubTotal { get; set; }
         public decimal? TaxAmount { get; set; }
         public decimal? TotalAmount { get; set; }
