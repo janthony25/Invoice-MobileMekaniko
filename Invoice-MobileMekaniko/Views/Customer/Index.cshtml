@@ -1,8 +1,15 @@
 ﻿@model List<Invoice_MobileMekaniko.Models.tblCustomer>
 
-<h1 class="text-center mb-4">Customer List</h1>
 
-<table class="table">
+
+<h1 class="text-center mb-4 customer-list">Customer List</h1>
+
+<!-- Button to trigger the modal -->
+<div class="d-flex justify-content-end">
+
+    <button type="button" class="btn btn-primary btn-add-customer mb-3" data-bs-toggle="modal" data-bs-target="#AddCustomerModal"><i class="bi bi-plus-square"></i> Customer</button>
+</div>
+<table class="table table-striped">
     <thead>
         <tr>
             <th class="text-center">Car Rego</th>
@@ -14,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var customer in Model)
+        @foreach (var customer in Model)
         {
             <tr>
                 <td class="text-center">@customer.CarRego</td>
@@ -23,9 +30,92 @@
                 <td class="text-center">@customer.CarModel</td>
                 <td class="text-center">@customer.PaymentStatus</td>
                 <td class="text-center">
-                    <a class="btn btn-primary">Edit</a>
+                    <div>
+                        <a class="btn btn-primary" asp-controller="Customer" asp-action="GetCustomerInvoiceSummary" asp-route-carRego="@customer.CarRego"><i class="bi bi-pencil-square"></i></a>
+                        <a class="btn btn-primary ms-1"><i class="bi bi-currency-dollar"></i></a>
+                        <a class="btn btn-primary ms-1"><i class="bi bi-trash"></i></a>
+
+            
+                    </div>
+                    
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="AddCustomerModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Add New Customer</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addCustomerForm">
+                    @Html.AntiForgeryToken()
+                    <div class="mb-3">
+                        <label for="CarRego" class="form-label">Rego #</label>
+                        <input type="text" class="form-control" id="CarRego" name="CarRego" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="CustomerName" class="form-label">Customer Name</label>
+                        <input type="text" class="form-control" id="CustomerName" name="CustomerName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="CarMake" class="form-label">Car Make</label>
+                        <input type="text" class="form-control" id="CarMake" name="CarMake" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="CarModel" class="form-label">Car Model</label>
+                        <input type="text" class="form-control" id="CarModel" name="CarModel" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="PaymentStatus" class="form-label">Payment Status</label>
+                        <select class="form-control" id="PaymentStatus" name="PaymentStatus">
+                            <option value="Paid">Paid</option>
+                            <option value="Unpaid">Unpaid</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveCustomerButton">Add Customer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ensure jQuery is included -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#saveCustomerButton').click(function () {
+            var formData = $('#addCustomerForm').serialize();
+            console.log('Form Data:', formData);
+
+            $.ajax({
+                url: '@Url.Action("Create", "Customer")',
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    console.log('Response:', response);
+                    if (response.success) {
+                        alert(response.message);
+                        $('#AddCustomerModal').modal('hide');
+                        location.reload(); // Reload the page to update the list
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error details:', xhr.responseText, status, error);
+                    alert('Error submitting form: ' + xhr.responseText);
+                }
+            });
+        });
+    });
+</script>

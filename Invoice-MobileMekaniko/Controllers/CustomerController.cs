@@ -7,9 +7,12 @@ namespace Invoice_MobileMekaniko.Controllers
     public class CustomerController : Controller
     {
         private readonly ICustomerRepository _customerRepository;
-        public CustomerController(ICustomerRepository customerRepository)
+        private readonly ICustomerInvoiceSummaryRepository _customerSummary;
+        public CustomerController(ICustomerRepository customerRepository, ICustomerInvoiceSummaryRepository customerSummary)
         {
             _customerRepository = customerRepository;
+            _customerSummary = customerSummary;
+
         }
 
         // Customer List Page
@@ -39,12 +42,29 @@ namespace Invoice_MobileMekaniko.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(tblCustomer customer)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 await _customerRepository.AddCustomerAsync(customer);
-                return RedirectToAction("Index");
+                return Json(new { success = true, message = "Customer Added" });
             }
-            return View(customer);
+            return Json(new { success = false, message = "Customer Validation Failed" });
+        }
+
+        // GET
+        public async Task<IActionResult> GetCustomerInvoiceSummary(string carRego)
+        {
+            if (string.IsNullOrEmpty(carRego))
+            {
+                return NotFound();
+            }
+
+            var invoiceSummary = await _customerSummary.GetCustomerInvoiceSummaryAsync(carRego);
+            if (invoiceSummary == null || !invoiceSummary.Any())
+            {
+                return NotFound();
+            }
+
+            return View(invoiceSummary);
         }
     }
 }

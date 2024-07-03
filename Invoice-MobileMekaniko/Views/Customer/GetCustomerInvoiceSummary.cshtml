@@ -1,0 +1,41 @@
+﻿@model List<Invoice_MobileMekaniko.Models.Dto.CustomerInvoiceSummaryDto>
+
+<h1>Invoice Summary</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Car Rego</th>
+            <th>Customer Name</th>
+            <th>Email</th>
+            <th>Car Make</th>
+            <th>Car Model</th>
+            <th>Payment Status</th>
+            <th>Invoice ID</th>
+            <th>Date Added</th>
+            <th>Issue Name</th>
+            <th>Due Date</th>
+            <th>Total Amount</th>
+            <th>Amount Paid</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CarRego</td>
+                <td>@item.CustomerName</td>
+                <td>@item.CustomerEmail</td>
+                <td>@item.CarMake</td>
+                <td>@item.CarModel</td>
+                <td>@item.PaymentStatus</td>
+                <td>@item.InvoiceId</td>
+                <td>@item.DateAdded?.ToString("d")</td>
+                <td>@item.IssueName</td>
+                <td>@item.DueDate?.ToString("d")</td>
+                <td>@item.TotalAmount?.ToString("C")</td>
+                <td>@item.AmountPaid?.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
