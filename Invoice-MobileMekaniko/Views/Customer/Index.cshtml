@@ -24,16 +24,15 @@
         @foreach (var customer in Model)
         {
             <tr>
-                <td class="text-center">@customer.CarRego</td>
-                <td class="text-center">@customer.CustomerName</td>
-                <td class="text-center">@customer.CarMake</td>
-                <td class="text-center">@customer.CarModel</td>
-                <td class="text-center">@customer.PaymentStatus</td>
-                <td class="text-center">
+                <td class="text-center align-middle">@customer.CarRego</td>
+                <td class="text-center align-middle">@customer.CustomerName</td>
+                <td class="text-center align-middle">@customer.CarMake</td>
+                <td class="text-center align-middle">@customer.CarModel</td>
+                <td class="text-center align-middle">@customer.PaymentStatus</td>
+                <td class="text-center align-middle">
                     <div>
-                        <a class="btn btn-primary" asp-controller="Customer" asp-action="GetCustomerInvoiceSummary" asp-route-carRego="@customer.CarRego"><i class="bi bi-pencil-square"></i></a>
-                        <a class="btn btn-primary ms-1"><i class="bi bi-currency-dollar"></i></a>
-                        <a class="btn btn-primary ms-1"><i class="bi bi-trash"></i></a>
+                        <a class="btn btn-primary home-btn" asp-controller="Customer" asp-action="GetCustomerInvoiceSummary" asp-route-carRego="@customer.CarRego"><i class="bi bi-pencil-square"></i></a>                    
+                        <a class="btn btn-primary home-btn ms-1"><i class="bi bi-trash"></i></a>
 
             
                     </div>

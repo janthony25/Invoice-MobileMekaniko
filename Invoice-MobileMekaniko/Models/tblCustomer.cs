@@ -7,7 +7,10 @@ namespace Invoice_MobileMekaniko.Models
         [Key]
         public string CarRego { get; set; }
         [Required]
+        [Display(Name = "Full Name")]
         public string CustomerName { get; set; }
+
+        [Display(Name = "Customer Email:")]
         public string? CustomerEmail { get; set; }
         public string? CarMake { get; set; }
         public string? CarModel { get; set; }

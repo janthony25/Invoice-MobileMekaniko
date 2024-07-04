@@ -1,1 +1,59 @@
-﻿
+﻿a {
+    font-size: 14px;
+}
+
+.home-btn {
+    background-color: transparent;
+    border: none; 
+    font-size: 18px;
+}
+
+.home-btn:hover {
+    background-color: transparent;
+}
+
+.customer-detail-container {
+    padding: 15px;
+}
+
+.section-title {
+    border-bottom: 2px solid orange;
+}
+
+input {
+    width: 300px;
+}
+
+th,
+td {
+    text-align: center;
+    font-size: 14px;
+}
+
+button {
+    border: none;
+    font-size: 18px;
+}
+
+.bi-pencil-square {
+    color: orange;
+}
+
+.section-title .bi-pencil-square{
+    color: black;
+}
+
+.bi-trash {
+    color: red;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn-add-invoice {
+    background-color: orange;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+}
