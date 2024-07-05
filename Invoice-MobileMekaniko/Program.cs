@@ -15,6 +15,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 //Repositories
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerInvoiceSummaryRepository, CustomerInvoiceSummaryRepository>();
+builder.Services.AddScoped<ICustomerInvoiceRepository, CustomerInvoiceRepository>();
 
 // Razor Runtime Compilation
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();

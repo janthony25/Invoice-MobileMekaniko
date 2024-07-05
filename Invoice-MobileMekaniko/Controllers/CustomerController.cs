@@ -8,11 +8,12 @@ namespace Invoice_MobileMekaniko.Controllers
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly ICustomerInvoiceSummaryRepository _customerSummary;
-        public CustomerController(ICustomerRepository customerRepository, ICustomerInvoiceSummaryRepository customerSummary)
+        private readonly ICustomerInvoiceRepository _customerInvoiceRepository;
+        public CustomerController(ICustomerRepository customerRepository, ICustomerInvoiceSummaryRepository customerSummary, ICustomerInvoiceRepository customerInvoiceRepository)
         {
             _customerRepository = customerRepository;
             _customerSummary = customerSummary;
-
+            _customerInvoiceRepository = customerInvoiceRepository;
         }
 
         // Customer List Page
@@ -65,6 +66,44 @@ namespace Invoice_MobileMekaniko.Controllers
             }
 
             return View(invoiceSummary);
+        }
+
+        // GET - Add CustomerInvoice
+        public async Task<IActionResult> CreateCustomerInvoice(string carRego)
+        {
+            var customer = await _customerInvoiceRepository.GetCustomerByCarRegoAsync(carRego);
+
+            if (customer == null)
+            {
+                return NotFound(); // or handle the case where customer is not found
+            }
+
+            var model = new CustomerInvoiceViewModel
+            {
+                CarRego = customer.CarRego,
+                CustomerName = customer.CustomerName,
+                CustomerEmail = customer.CustomerEmail,
+                CarMake = customer.CarMake,
+                CarModel = customer.CarModel,
+                PaymentStatus = customer.PaymentStatus,
+                InvoiceItems = new List<InvoiceItemViewModel> { new InvoiceItemViewModel() }
+            };
+
+            return View(model);
+        }
+
+        // POST - Add new Customer Invoice
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCustomerInvoice(CustomerInvoiceViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _customerInvoiceRepository.AddCustomerInvoiceAsync(model);
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
         }
     }
 }
