@@ -2,6 +2,10 @@
     font-size: 14px;
 }
 
+form .container {
+    width: 1190px;
+}
+
 .home-btn {
     background-color: transparent;
     border: none; 
@@ -20,7 +24,8 @@
     border-bottom: 2px solid orange;
 }
 
-input {
+input,
+.input {
     width: 300px;
 }
 
@@ -56,4 +61,35 @@ a {
     color: black;
     padding: 5px;
     border-radius: 5px;
+}
+
+.create-customer-cd-from {
+    border: 1px solid black;
+}
+
+/* Create Customer Invoice css */
+
+/*.create-invoice-cd-right-section {
+    margin-left: 100%;
+}*/
+
+.heading-title span {
+    background-color: orange;
+    width: 100%;
+}
+
+.heading-title-container {
+    background-color: orange;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.heading-title {
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+.create-customer-invoice-right-section {
+    width: 500px;
 }
